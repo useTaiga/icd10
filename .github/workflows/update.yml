@@ -1,0 +1,53 @@
+name: Update CMS catalog
+on:
+  schedule:
+    - cron: '17 13 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: update-catalog
+  cancel-in-progress: false
+jobs:
+  keepalive:
+    if: github.event_name == 'schedule'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+    steps:
+      - name: Keep scheduled checks enabled during quiet release periods
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow enable update.yml --repo "$GITHUB_REPOSITORY"
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.1
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - run: bun install --frozen-lockfile
+      - run: bun run update
+      - id: changes
+        run: |
+          if ! git diff --quiet -- src/data; then
+            npm version patch --no-git-tag-version --ignore-scripts
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+      - if: steps.changes.outputs.changed == 'true'
+        run: bun run check
+      - if: steps.changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v8
+        with:
+          token: ${{ secrets.UPDATE_TOKEN || github.token }}
+          branch: automation/update-catalog
+          title: 'chore(data): update official ICD-10-CM catalog'
+          commit-message: 'chore(data): update official ICD-10-CM catalog'
+          body-path: UPDATE.md
+          add-paths: |
+            src/data
+            package.json

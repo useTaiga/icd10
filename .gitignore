@@ -1,0 +1,6 @@
+node_modules/
+dist/
+src/index.ts
+src/releases/
+UPDATE.md
+*.tgz

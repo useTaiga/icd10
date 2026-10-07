@@ -1,0 +1,38 @@
+[
+  {
+    "id": "2025-10-01",
+    "fiscalYear": 2026,
+    "effectiveFrom": "2025-10-01",
+    "effectiveThrough": "2026-03-31",
+    "sourceUrl": "https://www.cms.gov/files/zip/2026-code-descriptions-tabular-order.zip",
+    "archiveSha256": "55a9124a27ca78a4a5c41e1101eda064ec2e08d105ff9e78d1fbd1a83298ef11",
+    "orderFile": "icd10cm_order_2026.txt",
+    "orderFileSha256": "6dc95c9c7e96c734806e1682f4bf9df76251d60e99199bba0d375ba3dd11026b",
+    "entryCount": 98186,
+    "billableCount": 74719
+  },
+  {
+    "id": "2026-04-01",
+    "fiscalYear": 2026,
+    "effectiveFrom": "2026-04-01",
+    "effectiveThrough": "2026-09-30",
+    "sourceUrl": "https://www.cms.gov/files/zip/april-1-2026-code-descriptions-tabular-order.zip",
+    "archiveSha256": "4fd9d8b37f02ab42827c7e7be30595c005b0cc3a6bae7a515e3f4c86b6918688",
+    "orderFile": "Code Descriptions/icd10cm_order_2026.txt",
+    "orderFileSha256": "6dc95c9c7e96c734806e1682f4bf9df76251d60e99199bba0d375ba3dd11026b",
+    "entryCount": 98186,
+    "billableCount": 74719
+  },
+  {
+    "id": "2026-10-01",
+    "fiscalYear": 2027,
+    "effectiveFrom": "2026-10-01",
+    "effectiveThrough": "2027-09-30",
+    "sourceUrl": "https://www.cms.gov/files/zip/2027-code-descriptions-tabular-order.zip",
+    "archiveSha256": "91c6c9d1117764ce72375a0f3a5493b1725dafbc1ab283b55799076c9e194965",
+    "orderFile": "Code Descriptions/icd10cm_order_2027.txt",
+    "orderFileSha256": "38981fb2c1226e2b92393cef7d921d2293494dd184b5ad039dde08e4b364265f",
+    "entryCount": 98403,
+    "billableCount": 74879
+  }
+]

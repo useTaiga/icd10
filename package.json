@@ -1,0 +1,44 @@
+{
+  "name": "@usetaiga/icd10cm",
+  "version": "1.0.0",
+  "description": "Official ICD-10-CM codes and descriptions, with dated releases and offline TypeScript lookups",
+  "type": "module",
+  "license": "MIT",
+  "repository": { "type": "git", "url": "git+https://github.com/useTaiga/icd10.git" },
+  "homepage": "https://github.com/useTaiga/icd10#readme",
+  "bugs": "https://github.com/useTaiga/icd10/issues",
+  "keywords": ["icd10", "icd-10-cm", "medical-codes", "diagnosis", "typescript"],
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./catalog": { "types": "./dist/catalog.d.ts", "import": "./dist/catalog.js" },
+    "./releases/*": { "types": "./dist/releases/*.d.ts", "import": "./dist/releases/*.js" },
+    "./data/*": "./dist/data/*.json",
+    "./package.json": "./package.json"
+  },
+  "types": "./dist/index.d.ts",
+  "files": ["dist", "NOTICE.md"],
+  "sideEffects": false,
+  "engines": { "node": ">=22" },
+  "packageManager": "bun@1.4.1",
+  "publishConfig": { "access": "public", "provenance": true },
+  "scripts": {
+    "update": "bun scripts/update.ts",
+    "generate": "bun scripts/generate.ts",
+    "compile": "tsc -p tsconfig.build.json",
+    "build": "bun run generate && bun run compile",
+    "typecheck": "bun run generate && tsc --noEmit",
+    "test": "bun test",
+    "smoke": "node scripts/smoke.mjs",
+    "pack:test": "bun scripts/pack-test.ts",
+    "publish:ci": "bun scripts/publish.ts",
+    "check": "bun run typecheck && bun run test && bun run build && bun run smoke && bun run pack:test",
+    "prepack": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.0",
+    "@types/node": "^22.20.5",
+    "cheerio": "^1.2.0",
+    "fflate": "^0.8.3",
+    "typescript": "~6.0.3"
+  }
+}
