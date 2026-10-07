@@ -44,7 +44,7 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.UPDATE_TOKEN || github.token }}
-          branch: automation/update-catalog
+          branch: adam/update-catalog
           title: 'chore(data): update official ICD-10-CM catalog'
           commit-message: 'chore(data): update official ICD-10-CM catalog'
           body-path: UPDATE.md

@@ -112,11 +112,15 @@ between code releases.
 
 One-time setup:
 
-1. In GitHub **Settings → Actions → General**, allow Actions to create pull
-   requests. For update PRs to trigger separate CI workflows, set an
-   `UPDATE_TOKEN` secret with contents and pull-request write access to this
-   repository. Without it, the updater still verifies changes before opening
-   its PR, but GitHub's default token does not trigger PR workflows.
+1. Set an `UPDATE_TOKEN` secret using a bot's fine-grained GitHub token scoped
+   to this repository, with contents and pull-request write permissions. This
+   lets update PRs trigger CI. Alternatively, allow GitHub Actions to create
+   pull requests in the organization and repository's **Settings → Actions →
+   General**. The `useTaiga` organization currently disables that default-token
+   permission, and a repository setting cannot override it. Without a bot
+   token or the organization change, release checks run but opening update PRs
+   is blocked. With the default token, updates are verified in the updater
+   workflow, but separate PR workflows do not trigger.
 2. Publish version 1.0.0 from an npm account allowed to publish under
    `@usetaiga`: `npm login`, `bun run check`, then
    `npm publish --access public --provenance=false`. The initial publication
